@@ -1,0 +1,188 @@
+
+
+.liste_commande{
+    margin: 4% auto;
+   padding: 20px;
+    width: 90%;
+    color: white;
+    background-color: #161515;
+   
+}
+.liste_commande .liste_commande-titre{
+    margin-right: 4%;
+    font-weight: 400;
+    text-align: left;
+    color: white;
+  
+}
+
+.liste_commande button{
+    color: white;
+    padding: 10px 20px;
+
+   
+
+}
+
+/* Style pour la DataTable elle-même */
+.p-datatable {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 1%;
+  }
+  .p-datatable .p-column-header-content {
+    display: block;
+}
+  
+  .p-datatable thead th {
+    background-color: var(--primary-color);
+    font-weight: bold;
+    padding: 1.5% 0%;
+    color: white;
+  }
+  
+  /* Style pour les cellules de données */
+  .p-datatable tbody td {
+    padding: 10px;
+  vertical-align: middle; 
+  }
+  .p-datatable tbody tr:nth-child(odd) {
+    background-color: #04525327; /* Couleur de fond pour les lignes impaires */
+  }
+  
+  /* Style pour les boutons de pagination */
+  .p-paginator .p-paginator-current,
+  .p-paginator .p-paginator-pages {
+    margin: 2px;
+  
+    display: flex;
+    justify-content: space-between;
+  }
+  .p-paginator-page{
+    color: #045253;
+    width: 30px;
+  }
+  /* Style pour les boutons de pagination actifs */
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: #FFD335;
+    color:white;
+   width: 16px;
+   height: 25px;
+   border-radius: 100%;
+  }
+  .datatable-bordered {
+    border: 1px solid #ccc; /* Adjust border style and color */
+  }
+  /* In your ListCommande.css file */
+.status-button {
+    background-color: #ffc107 !important; /* Yellow background */
+    color: black;  /* Black text color */
+    padding: 5px 10px; /* Button padding */
+    border-radius: 5px; /* Border radius */
+    border: none; /* Remove default border */
+    cursor: pointer; /* Indicate clickable button */
+  }
+  .p-tag-value{
+    background-color: transparent;
+  }
+  
+ 
+  
+  .popup-content1 {
+    background-color: black;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    margin: auto;
+  }
+  
+  .popup-content1 h2 {
+    margin-bottom: 15px;
+    background-color: transparent;
+    color: white;
+
+  }
+  
+  .popup-content1 p {
+    margin-bottom: 15px;
+    background-color: transparent;
+    color: white;
+  }
+  
+  .popup-content1 button {
+    background-color: #FFD234;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+
+
+
+
+  .popup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .popup-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .popup-message {
+    margin-bottom: 20px;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+  }
+  
+  .modal-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+ 
+  
+  .modal-buttons button:first-child {
+    background-color: #FF7955
+    ;
+    color: #333;
+  }
+  
+  .modal-buttons button:last-child {
+    background-color: #FFD335
+    ;
+    color: #fff;
+  }
+  
+  .modal-buttons button:last-child:hover {
+    background-color: #FFD335
+    ;
+  }
+  .btn_validate{
+    border: none;
+  }
+  
+  .ReactModal__Content {
+    border: none !important;
+    background: transparent !important;
+    overflow: hidden !important;
+    padding: 40px !important;
+  }
+  .ReactModal__Content--after-open{
+    border: none !important;
+    background: transparent !important;
+    overflow: hidden !important;
+    padding: 40px !important;
+  }
