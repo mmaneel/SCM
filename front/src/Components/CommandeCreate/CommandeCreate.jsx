@@ -52,10 +52,14 @@ function CommandeCreate() {
   };
 
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [cardNumber, setCardNumber] = useState('');
+  const [p_nom_client, setFirstName] = useState('');
+  const [p_prenom_client, setLastName] = useState('');
+  const [p_num_tel, setPhoneNumber] = useState('');
+  const [p_numero_carte, setCardNumber] = useState('');
+  const [p_cvv, setCardcvv] = useState('');
+  const [p_adresse, setAdresse] = useState('');
+  const [p_type_i, setCardType] = useState('');
+  const [p_code_postal, setCodePostal] = useState('');
   const [expDate, setExpDate] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State for popup visibility
   const [popupMessage, setPopupMessage] = useState(''); // State for popup message
@@ -129,26 +133,44 @@ function CommandeCreate() {
       <form onSubmit={handleSubmit}>
         <div className="input-group-container">
           <div className="input-group">
-            <label htmlFor="firstName">Prénom</label>
-            <input type="text" id="firstName" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+            <label htmlFor="p_nom_client">Prénom</label>
+            <input type="text" id="p_nom_client" name="p_nom_client" value={p_nom_client} onChange={(e) => setFirstName(e.target.value)} />
           </div>
           <div className="input-group">
-            <label htmlFor="lastName">Nom</label>
-            <input type="text" id="lastName" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+            <label htmlFor="p_prenom_client">Nom</label>
+            <input type="text" id="p_prenom_client" name="p_prenom_client" value={p_prenom_client} onChange={(e) => setLastName(e.target.value)} />
           </div>
           <div className="input-group">
-            <label htmlFor="phoneNumber">Numéro de téléphone</label>
-            <input type="tel" id="phoneNumber" name="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+            <label htmlFor="p_num_tel">Numéro de téléphone</label>
+            <input type="tel" id="p_num_tel" name="p_num_tel" value={p_num_tel} onChange={(e) => setPhoneNumber(e.target.value)} />
           </div>
         </div>
         <div className="input-group-container">
           <div className="input-group">
-            <label htmlFor="cardNumber">Numéro de carte</label>
-            <input type="text" id="cardNumber" name="cardNumber" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} />
+            <label htmlFor="p_numero_carte">Numéro de carte</label>
+            <input type="text" id="p_numero_carte" name="p_numero_carte" value={p_numero_carte} onChange={(e) => setCardNumber(e.target.value)} />
+          </div>
+          <div className="input-group">
+            <label htmlFor="p_cvv">P Cvv</label>
+            <input type="text" id="p_cvv" name="p_cvv" value={p_cvv} onChange={(e) => setCardcvv(e.target.value)} />
+          </div>
+          <div className="input-group">
+            <label htmlFor="p_type_i">Type de carte</label>
+            <input type="text" id="p_type_i" name="p_type_i" value={p_type_i} onChange={(e) => setCardType(e.target.value)} />
           </div>
           <div className="input-group">
             <label htmlFor="expDate">Date d'expiration</label>
             <input type="text" id="expDate" name="expDate" value={expDate} onChange={(e) => setExpDate(e.target.value)} />
+          </div>
+        </div>
+        <div className="input-group-container">
+          <div className="input-group">
+            <label htmlFor="p_adresse">Adresse</label>
+            <input type="text" id="p_adresse" name="p_adresse" value={p_adresse} onChange={(e) => setAdresse(e.target.value)} />
+          </div>
+          <div className="input-group">
+            <label htmlFor="p_code_postal">Code postal</label>
+            <input type="text" id="p_code_postal" name="p_code_postal" value={p_code_postal} onChange={(e) => setCodePostal(e.target.value)} />
           </div>
         </div>
         <button type="submit">Confirm your Command</button>

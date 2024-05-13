@@ -42,6 +42,8 @@ products_cursor = """
     END;
 """
 
+products = []
+
 
 # Fetch and print the output for Listing Orders
 
