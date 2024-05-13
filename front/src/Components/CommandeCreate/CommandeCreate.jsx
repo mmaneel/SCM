@@ -2,30 +2,37 @@ import React, { useState } from 'react';
 import "./Commande.css"
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Popup from './PopupCommand'
+import axios from 'axios';
 
 function CommandeCreate() {
   const produits = [
     {
+      id: 1,
       title: 'Produit 1',
       description: 'Description du produit 1',
     },
     {
+      id: 2,
       title: 'Produit 2',
       description: 'Description du produit 2',
     },
     {
+      id: 3,
       title: 'Produit 3',
       description: 'Description du produit 3',
     },
     {
+      id: 4,
       title: 'Produit 4',
       description: 'Description du produit 4',
     },
     {
+      id: 5,
       title: 'Produit 5',
       description: 'Description du produit 5',
     },
     {
+      id: 6,
       title: 'Produit 6',
       description: 'Description du produit 6',
     },
@@ -53,13 +60,43 @@ function CommandeCreate() {
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State for popup visibility
   const [popupMessage, setPopupMessage] = useState(''); // State for popup message
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const message = 'Thank you for your order We will contact you for the details.';
-    setPopupMessage(message);
-    setIsPopupOpen(true); // Show the popup
-  };
 
+    // Construire un tableau d'objets contenant les informations de chaque produit
+    const productsData = produits.map((produit, index) => {
+      return {
+        productId: produit.id,
+        quantity: counts[index]
+      };
+    });
+
+    // Construire l'objet de données à envoyer au backend
+    const data = {
+      firstName: firstName,
+      lastName: lastName,
+      phoneNumber: phoneNumber,
+      cardNumber: cardNumber,
+      expDate: expDate,
+      products: productsData
+    };
+
+    // Envoyer les données au backend
+    axios.post('/api/commande', data)
+      .then(response => {
+        // Traiter la réponse du backend si nécessaire
+        console.log(response.data);
+        const message = 'Thank you for your order We will contact you for the details.';
+        setPopupMessage(message);
+        setIsPopupOpen(true);
+      })
+      .catch(error => {
+        // Gérer les erreurs
+        console.error('Error:', error);
+      });
+  };
+  
   const handlePopupClose = () => {
     setIsPopupOpen(false);
   };
