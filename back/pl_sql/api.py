@@ -3,6 +3,7 @@ from flask_cors import CORS
 import cx_Oracle
 from create_commande import commande_creation
 from cursor_execute import *
+from maj_status_commande import * 
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000"]}})
@@ -34,9 +35,21 @@ def get_all_products():
 
 # Endpoint for retrieving orders
 @app.route('/api/orders', methods=['GET'])
-def get_orders():
+def get_all_orders():
     data = get_orders()
     return jsonify(data)
+
+
+# Endpoint for printing the result of maj_statut_commande
+@app.route('/api/maj_status', methods=['POST'])
+def maj_status():
+    data = request.json
+    p_commande_id = data.get("p_commande_id")
+    p_nouveau_statut = data.get("p_nouveau_statut")
+
+    result = maj_statut_commande(p_commande_id, p_nouveau_statut)
+    
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True)

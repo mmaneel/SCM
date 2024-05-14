@@ -1,13 +1,7 @@
 import cx_Oracle
+from common import * 
 
-# Replace these with your own connection details
-dsn = cx_Oracle.makedsn("localhost", 1522, service_name="orcl")
-    user = "manel"
-    password = "serine"
-
-# Connect to the database
-connection = cx_Oracle.connect(user, password, dsn)
-cursor = connection.cursor()
+connection,cursor = connect()
 
 def dbms_lines( cursor):
     status = cursor.var( cx_Oracle.NUMBER)
@@ -32,7 +26,5 @@ def execute_proc(cursor):
 
 execute_proc(cursor)
 
-
 # Close the cursor and connection
-cursor.close()
-connection.close()
+disconnect(connection,cursor)
