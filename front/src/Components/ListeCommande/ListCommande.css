@@ -34,11 +34,11 @@
     display: block;
 }
   
-  .p-datatable thead th {
+  .liste_commande .p-datatable thead th {
     background-color: var(--primary-color);
     font-weight: bold;
     padding: 1.5% 0%;
-    color: white;
+    color:#FFD234;
   }
   
   /* Style pour les cellules de données */
@@ -165,13 +165,20 @@
     ;
     color: #fff;
   }
-  
+  .select-bg-white {
+    background-color: white;
+  }
   .modal-buttons button:last-child:hover {
     background-color: #FFD335
     ;
   }
   .btn_validate{
     border: none;
+    width: 300px;
+  }
+  .status-button{
+    width: 150px;
+    height: 30px;
   }
   
   .ReactModal__Content {

@@ -34,7 +34,7 @@ def get_all_products():
 
 # Endpoint for retrieving orders
 @app.route('/api/orders', methods=['GET'])
-def get_orders():
+def get_all_orders():
     data = get_orders()
     return jsonify(data)
 
