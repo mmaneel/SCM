@@ -42,7 +42,7 @@ def get_orders():
         order_total = float(line.split('Total: ')[1].strip())
 
         # Append order to the orders list
-        orders.append({"client": client_name, "phone": client_phone, "id": order_id, "date": order_date, "total": order_total})
+        orders.append({"client": client_name, "phone": client_phone, "id": order_id, "date": order_date, "total": order_total})  
 
     return orders
 
