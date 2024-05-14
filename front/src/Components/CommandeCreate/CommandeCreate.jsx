@@ -91,7 +91,7 @@ function CommandeCreate() {
     };
 
     // Envoyer les données au backend
-    axios.post('/api/commande', data)
+    axios.post('http://127.0.0.1:5000/api/commande', data)
       .then(response => {
         // Traiter la réponse du backend si nécessaire
         console.log(response.data);

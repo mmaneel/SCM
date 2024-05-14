@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import cx_Oracle
-from create_commande import *
+from create_commande import commande_creation
+from cursor_execute import *
 
 app = Flask(__name__)
 
@@ -30,14 +31,16 @@ def create_commande():
 
 # Endpoint for retrieving products
 @app.route('/api/products', methods=['GET'])
-def get_products():
-    return jsonify(get_products())
+def get_all_products():
+    data = get_products()
+    return jsonify(data)
 
 
 # Endpoint for retrieving orders
 @app.route('/api/orders', methods=['GET'])
 def get_orders():
-    return jsonify(get_orders())
+    data = get_orders()
+    return jsonify(data)
 
 
 if __name__ == '__main__':
