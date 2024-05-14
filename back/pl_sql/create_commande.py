@@ -12,11 +12,15 @@ def commande_creation(p_nom_client,p_prenom_client,p_num_tel,p_numero_carte,p_cv
     for item in product_quantity:
         product_id = item['productId']
         quantity = item['quantity']
+    for item in product_quantity:
+        product_id = item['productId']
+        quantity = item['quantity']
         product_quantity_object = product_quantity_type.newobject()
         product_quantity_object.PRODUCT_ID = product_id
         product_quantity_object.QUANTITY = quantity
         product_quantity_objects.append(product_quantity_object)
 
+    print(product_quantity_objects)
 
     # Call the PL/SQL procedure
     procedure_call = """
