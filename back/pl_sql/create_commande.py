@@ -9,9 +9,7 @@ def commande_creation(p_nom_client,p_prenom_client,p_num_tel,p_numero_carte,p_cv
     product_quantity_table = connection.gettype("PRODUCT_QUANTITY_TABLE")
 
     product_quantity_objects = product_quantity_table.newobject()
-    for item in product_quantity:
-        product_id = item['productId']
-        quantity = item['quantity']
+
     for item in product_quantity:
         product_id = item['productId']
         quantity = item['quantity']
@@ -40,6 +38,8 @@ def commande_creation(p_nom_client,p_prenom_client,p_num_tel,p_numero_carte,p_cv
             );
         END;
     """
+
+    
     cursor.execute(procedure_call, (
         p_nom_client,
         p_prenom_client, 
