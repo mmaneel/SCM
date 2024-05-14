@@ -3,9 +3,9 @@ import cx_Oracle
 
 def connect(): 
     # Remplacez ces informations par vos propres détails de connexion
-    dsn = cx_Oracle.makedsn("localhost", 1521, service_name="orcl")
-    user = "C##soun"
-    password = "soun"
+    dsn = cx_Oracle.makedsn("localhost", 1522, service_name="orcl")
+    user = "manel"
+    password = "serine"
 
     # Connect to the database
     connection = cx_Oracle.connect(user, password, dsn)
@@ -29,12 +29,13 @@ def commande_creation(p_nom_client,p_prenom_client,p_num_tel,p_numero_carte,p_cv
     product_quantity_table = connection.gettype("PRODUCT_QUANTITY_TABLE")
 
     product_quantity_objects = product_quantity_table.newobject()
-    for product_id, quantity in product_quantity:
+    for item in product_quantity:
+        product_id = item['productId']
+        quantity = item['quantity']
         product_quantity_object = product_quantity_type.newobject()
         product_quantity_object.PRODUCT_ID = product_id
         product_quantity_object.QUANTITY = quantity
         product_quantity_objects.append(product_quantity_object)
-
 
     # Call the PL/SQL procedure
     procedure_call = """

@@ -1,9 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Importez Flask-CORS
+
 import cx_Oracle
 from create_commande import commande_creation
 from cursor_execute import *
 
 app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000"]}})
 
 # Assuming cx_Oracle setup and connection code is already done
 

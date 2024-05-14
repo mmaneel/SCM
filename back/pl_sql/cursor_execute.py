@@ -29,9 +29,9 @@ def execute_proc(cursor,proc):
 
 def get_orders():
     # Replace these with your actual connection details
-    dsn = cx_Oracle.makedsn("localhost", 1521, service_name="orcl")
-    user = "C##soun"
-    password = "soun"
+    dsn = cx_Oracle.makedsn("localhost", 1522, service_name="orcl")
+    user = "manel"
+    password = "serine"
 
     # Connect to the database
     connection = cx_Oracle.connect(user, password, dsn)
@@ -84,9 +84,9 @@ def get_orders():
 
 def get_products(): 
     # Replace these with your actual connection details
-    dsn = cx_Oracle.makedsn("localhost", 1521, service_name="orcl")
-    user = "C##soun"
-    password = "soun"
+    dsn = cx_Oracle.makedsn("localhost", 1522, service_name="orcl")
+    user = "manel"
+    password = "serine"
 
     # Connect to the database
     connection = cx_Oracle.connect(user, password, dsn)
