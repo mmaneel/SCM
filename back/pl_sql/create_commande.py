@@ -54,6 +54,8 @@ def commande_creation(p_nom_client,p_prenom_client,p_num_tel,p_numero_carte,p_cv
         product_quantity_objects    # p_product_quantity
     ))
 
+
+
     disconnect(connection,cursor)
 
 
