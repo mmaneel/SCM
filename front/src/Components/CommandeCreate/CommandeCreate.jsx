@@ -60,7 +60,7 @@ function CommandeCreate() {
   const [p_adresse, setAdresse] = useState('');
   const [p_type_i, setCardType] = useState('');
   const [p_code_postal, setCodePostal] = useState('');
-  const [expDate, setExpDate] = useState('');
+  const [p_date_exp, setExpDate] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State for popup visibility
   const [popupMessage, setPopupMessage] = useState(''); // State for popup message
 
@@ -78,11 +78,15 @@ function CommandeCreate() {
 
     // Construire l'objet de données à envoyer au backend
     const data = {
-      firstName: firstName,
-      lastName: lastName,
-      phoneNumber: phoneNumber,
-      cardNumber: cardNumber,
-      expDate: expDate,
+      p_nom_client: p_nom_client,
+      p_prenom_client: p_prenom_client,
+      p_num_tel: p_num_tel,
+      p_numero_carte: p_numero_carte,
+      p_cvv:p_cvv,
+      p_adresse:p_adresse,
+      p_type_i:p_type_i,
+      p_code_postal:p_code_postal,
+      p_date_exp: p_date_exp,
       products: productsData
     };
 
@@ -159,8 +163,8 @@ function CommandeCreate() {
             <input type="text" id="p_type_i" name="p_type_i" value={p_type_i} onChange={(e) => setCardType(e.target.value)} />
           </div>
           <div className="input-group">
-            <label htmlFor="expDate">Date d'expiration</label>
-            <input type="text" id="expDate" name="expDate" value={expDate} onChange={(e) => setExpDate(e.target.value)} />
+            <label htmlFor="p_date_exp">Date d'expiration</label>
+            <input type="text" id="p_date_exp" name="p_date_exp" value={p_date_exp} onChange={(e) => setExpDate(e.target.value)} />
           </div>
         </div>
         <div className="input-group-container">
