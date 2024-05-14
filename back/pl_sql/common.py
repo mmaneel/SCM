@@ -2,9 +2,9 @@ import cx_Oracle
 
 def connect(): 
     # Remplacez ces informations par vos propres détails de connexion
-    dsn = cx_Oracle.makedsn("localhost", 1521, service_name="orcl")
-    user = "C##soun"
-    password = "soun"
+    dsn = cx_Oracle.makedsn("localhost", 1522, service_name="orcl")
+    user = "manel"
+    password = "serine"
 
     # Connect to the database
     connection = cx_Oracle.connect(user, password, dsn)
