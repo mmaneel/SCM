@@ -38,19 +38,41 @@ function CommandeCreate() {
     },
   ];
 
-  // Tableau d'états pour suivre le nombre d'incréments pour chaque produit
   const [counts, setCounts] = useState(Array(produits.length).fill(0));
+  const [selectedProducts, setSelectedProducts] = useState({}); // Stocker les produits sélectionnés dans un objet
 
-  // Fonction pour incrémenter le nombre pour un produit spécifique
   const incrementCount = (index) => {
-    // Créer une copie du tableau des counts
     const newCounts = [...counts];
-    // Incrémenter le compteur pour le produit à l'index donné
     newCounts[index] += 1;
-    // Mettre à jour le tableau des counts
     setCounts(newCounts);
+
+    const productId = produits[index].id;
+    setSelectedProducts(prevSelectedProducts => {
+      // Vérifier si le produit est déjà sélectionné
+      if (prevSelectedProducts.hasOwnProperty(productId)) {
+        // S'il est déjà sélectionné, mettre à jour la quantité
+        return {
+          ...prevSelectedProducts,
+          [productId]: prevSelectedProducts[productId] + 1
+        };
+      } else {
+        // S'il n'est pas déjà sélectionné, l'ajouter avec une quantité de 1
+        return {
+          ...prevSelectedProducts,
+          [productId]: 1
+        };
+      }
+    });
   };
 
+  // Fonction pour retirer un produit de la liste des produits sélectionnés
+  const removeFromSelected = (productId) => {
+    setSelectedProducts(prevSelectedProducts => {
+      const updatedSelected = { ...prevSelectedProducts };
+      delete updatedSelected[productId];
+      return updatedSelected;
+    });
+  };
 
   const [p_nom_client, setFirstName] = useState('');
   const [p_prenom_client, setLastName] = useState('');
@@ -64,17 +86,8 @@ function CommandeCreate() {
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State for popup visibility
   const [popupMessage, setPopupMessage] = useState(''); // State for popup message
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Construire un tableau d'objets contenant les informations de chaque produit
-    const productsData = produits.map((produit, index) => {
-      return {
-        productId: produit.id,
-        quantity: counts[index]
-      };
-    });
 
     // Construire l'objet de données à envoyer au backend
     const data = {
@@ -87,32 +100,20 @@ function CommandeCreate() {
       p_type_i:p_type_i,
       p_code_postal:p_code_postal,
       p_date_exp: p_date_exp,
-      products: productsData
+      products: Object.entries(selectedProducts).map(([productId, quantity]) => ({ productId, quantity }))
     };
 
     // Envoyer les données au backend
-    axios.post('/api/commande', data)
-      .then(response => {
-        // Traiter la réponse du backend si nécessaire
-        console.log(response.data);
-        const message = 'Thank you for your order We will contact you for the details.';
-        setPopupMessage(message);
-        setIsPopupOpen(true);
-      })
-      .catch(error => {
-        // Gérer les erreurs
-        console.error('Error:', error);
-      });
+    console.log(data);
   };
   
   const handlePopupClose = () => {
     setIsPopupOpen(false);
   };
 
-
   return (
     <>
-      <div className='create_commande'>
+     <div className='create_commande'>
         <h1 className='create_commande-titre'>  Add your  order :</h1>
         <div className='produit_content'>
           {produits.map((produit, index) => (
@@ -125,7 +126,7 @@ function CommandeCreate() {
                   <AddCircleOutlineIcon sx={{ backgroundColor: 'transparent', color: '#FFD335', cursor: 'pointer' }} onClick={() => incrementCount(index)} />
                   <span>{counts[index]}</span>
                 </div>
-                <button className='add_btn'>Add</button>
+                <button className='add_btn' onClick={() => removeFromSelected(produit.id)}>Remove</button>
               </div>
             </div>
           ))}
