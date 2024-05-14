@@ -1,41 +1,10 @@
 import cx_Oracle
-from datetime import datetime
-
-# Fetch and print the output for Listing Orders
-
-def dbms_lines( cursor):
-    status = cursor.var( cx_Oracle.NUMBER)
-    line   = cursor.var( cx_Oracle.STRING)
-
-    lines = []
-    while True:
-        cursor.callproc( 'DBMS_OUTPUT.GET_LINE', (line, status))
-        if status.getvalue() == 0:
-            lines.append( line.getvalue())
-        else:
-            break
-
-    return lines
-
-def execute_proc(cursor,proc):
-    cursor.callproc("dbms_output.enable")
-    
-    # Execute the cursor for Listing Orders
-    cursor.execute(proc)
-
-    for line in dbms_lines(cursor):
-        print(line)
+from common import * 
 
 
 def get_orders():
     # Replace these with your actual connection details
-    dsn = cx_Oracle.makedsn("localhost", 1522, service_name="orcl")
-    user = "manel"
-    password = "serine"
-
-    # Connect to the database
-    connection = cx_Oracle.connect(user, password, dsn)
-    cursor = connection.cursor()
+    connection,cursor = connect()
 
     # Cursor for Listing Orders
     orders_cursor = """
@@ -63,8 +32,7 @@ def get_orders():
     lines = dbms_lines(cursor)
 
     # Close the cursor and connection
-    cursor.close()
-    connection.close()
+    disconnect(connection,cursor)
 
     for line in lines:
         client_name = line.split('Client: ')[1].split(',')[0].strip()
@@ -84,13 +52,7 @@ def get_orders():
 
 def get_products(): 
     # Replace these with your actual connection details
-    dsn = cx_Oracle.makedsn("localhost", 1522, service_name="orcl")
-    user = "manel"
-    password = "serine"
-
-    # Connect to the database
-    connection = cx_Oracle.connect(user, password, dsn)
-    cursor = connection.cursor()
+    connection,cursor = connect()
 
     # Cursor for Listing Products
     products_cursor = """
@@ -117,8 +79,7 @@ def get_products():
     lines = dbms_lines(cursor)
 
     # Close the cursor and connection
-    cursor.close()
-    connection.close()
+    disconnect(connection,cursor)
 
     for line in lines:
         # Extract product information from each line
