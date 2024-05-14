@@ -1,21 +1,20 @@
 import cx_Oracle
 from common import * 
 
-
 def get_orders():
     # Replace these with your actual connection details
-    connection,cursor = connect()
+    connection, cursor = connect()
 
     # Cursor for Listing Orders
     orders_cursor = """
         DECLARE
             CURSOR orders_cursor IS
-                SELECT c.nom_client, c.prenom_client, c.num_tel, cmd.id, cmd.commande_date, cmd.prix_total
+                SELECT c.nom_client, c.prenom_client, c.num_tel, cmd.id, cmd.commande_date, cmd.prix_total, cmd.status -- Include the status field
                 FROM client c
                 JOIN commande cmd ON c.id = cmd.id_client;
         BEGIN
             FOR order_row IN orders_cursor LOOP
-                DBMS_OUTPUT.PUT_LINE('Client: ' || order_row.nom_client || ' ' || order_row.prenom_client || ', Numéro de téléphone: ' || order_row.num_tel || ', Commande ID: ' || order_row.id || ', Date: ' || order_row.commande_date || ', Total: ' || order_row.prix_total);
+                DBMS_OUTPUT.PUT_LINE('Client: ' || order_row.nom_client || ' ' || order_row.prenom_client || ', Numéro de téléphone: ' || order_row.num_tel || ', Commande ID: ' || order_row.id || ', Date: ' || order_row.commande_date || ', Total: ' || order_row.prix_total || ', Statut: ' || order_row.status); -- Include the status in the output
             END LOOP;
         EXCEPTION
             WHEN OTHERS THEN
@@ -32,17 +31,18 @@ def get_orders():
     lines = dbms_lines(cursor)
 
     # Close the cursor and connection
-    disconnect(connection,cursor)
+    disconnect(connection, cursor)
 
     for line in lines:
         client_name = line.split('Client: ')[1].split(',')[0].strip()
         client_phone = line.split('Numéro de téléphone: ')[1].split(',')[0].strip()
         order_id = int(line.split('Commande ID: ')[1].split(',')[0].strip())
         order_date = line.split('Date: ')[1].split(',')[0].strip()
-        order_total = float(line.split('Total: ')[1].strip())
+        order_total = float(line.split('Total: ')[1].split(',')[0].strip())
+        order_status = line.split('Statut: ')[1].strip()  # Extracting order status
 
-        # Append order to the orders list
-        orders.append({"client": client_name, "phone": client_phone, "id": order_id, "date": order_date, "total": order_total})  
+        # Append order to the orders list including the status
+        orders.append({"client": client_name, "phone": client_phone, "id": order_id, "date": order_date, "total": order_total, "status": order_status})
 
     return orders
 
