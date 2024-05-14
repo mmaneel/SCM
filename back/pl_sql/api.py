@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import cx_Oracle
-from create_commande import commande_creation
+from create_commande import *
 
 app = Flask(__name__)
 
@@ -26,6 +26,19 @@ def create_commande():
     commande_creation(p_nom_client,p_prenom_client,p_num_tel,p_numero_carte,p_cvv,p_date_exp,p_balance,p_type_id,p_adresse,p_code_postal,product_quantity)
     
     return jsonify({'message': 'Order created successfully'})
+
+
+# Endpoint for retrieving products
+@app.route('/api/products', methods=['GET'])
+def get_products():
+    return jsonify(get_products())
+
+
+# Endpoint for retrieving orders
+@app.route('/api/orders', methods=['GET'])
+def get_orders():
+    return jsonify(get_orders())
+
 
 if __name__ == '__main__':
     app.run(debug=True)

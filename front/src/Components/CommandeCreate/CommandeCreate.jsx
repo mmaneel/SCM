@@ -53,7 +53,7 @@ function CommandeCreate() {
   const [p_adresse, setAdresse] = useState('');
   const [p_type_i, setCardType] = useState('');
   const [p_code_postal, setCodePostal] = useState('');
-  const [expDate, setExpDate] = useState('');
+  const [p_date_exp, setExpDate] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State for popup visibility
   const [popupMessage, setPopupMessage] = useState(''); // State for popup message
 

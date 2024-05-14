@@ -66,3 +66,5 @@ def commande_creation(p_nom_client,p_prenom_client,p_num_tel,p_numero_carte,p_cv
     # Close the cursor and connection
     cursor.close()
     connection.close()
+
+
