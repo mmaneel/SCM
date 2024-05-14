@@ -122,16 +122,16 @@ function CommandeCreate() {
     const data = {
       p_nom_client: p_nom_client,
       p_prenom_client: p_prenom_client,
-      p_num_tel: p_num_tel,
+      p_num_tel: parseInt(p_num_tel),
       p_numero_carte: p_numero_carte,
-      p_cvv: p_cvv,
+      p_cvv: parseInt(p_cvv),
       p_adresse: p_adresse,
-      p_type_i: p_type_i,
-      p_code_postal: p_code_postal,
-      p_date_exp: p_date_exp,
-      product_quantity: Object.entries(selectedProducts).map(([productId, quantity]) => ({ productId, quantity }))
+      p_type_i: parseInt(p_type_i),
+      p_code_postal: parseInt(p_code_postal),
+      p_date_exp: parseInt(p_date_exp),
+      product_quantity: Object.entries(selectedProducts).map(([productId, quantity]) => ({ productId: parseInt(productId), quantity }))
     };
-console.log(data)
+    console.log(data)
     // Envoyer les données au backend
     axios.post('http://127.0.0.1:5000/api/create_commande', data)
       .then(response => {
@@ -145,8 +145,7 @@ console.log(data)
         // Gérer les erreurs
         console.error('Error:', error);
       });
-  };
-
+    }
   const handlePopupClose = () => {
     setIsPopupOpen(false);
   };
