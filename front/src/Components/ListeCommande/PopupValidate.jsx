@@ -2,13 +2,13 @@ import React from 'react';
 import Modal from 'react-modal';
 import "./ListCommande.css";
 
-function PopupValidate({ isOpen, onClose, selectedRow }) { // Ajoutez les props selectedRow
+function PopupValidate({ isOpen, onClose, selectedRow, notification }) {
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
       style={{
-       overlay: {
+        overlay: {
           backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
           backdropFilter: 'blur(5px)', // Add blur filter for the background
         },
@@ -25,15 +25,14 @@ function PopupValidate({ isOpen, onClose, selectedRow }) { // Ajoutez les props 
       }}
     >
       <div className="popup-content1">
-        <h2>Validate Order</h2>
-        <p>Are you sure you want to validate the order for {selectedRow?.userInfo} (Order: {selectedRow?.numCom})?</p> {/* Affichez les informations de la ligne sélectionnée */}
+        <h2>Order Status Update</h2>
+        <p style={{color:'white'}}>{notification}</p>
         <div className="modal-buttons">
-          <button onClick={onClose}>Cancel</button> {/* Utilisez la fonction pour fermer le modal */}
-          <button>Validate</button>
+          <button onClick={onClose}>Close</button> {/* Utilisez la fonction pour fermer le modal */}
         </div>
       </div>
     </Modal>
-  )
+  );
 }
 
 export default PopupValidate;
