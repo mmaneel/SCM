@@ -2,30 +2,37 @@ import React, { useState } from 'react';
 import "./Commande.css"
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Popup from './PopupCommand'
+import axios from 'axios';
 
 function CommandeCreate() {
   const produits = [
     {
+      id: 1,
       title: 'Produit 1',
       description: 'Description du produit 1',
     },
     {
+      id: 2,
       title: 'Produit 2',
       description: 'Description du produit 2',
     },
     {
+      id: 3,
       title: 'Produit 3',
       description: 'Description du produit 3',
     },
     {
+      id: 4,
       title: 'Produit 4',
       description: 'Description du produit 4',
     },
     {
+      id: 5,
       title: 'Produit 5',
       description: 'Description du produit 5',
     },
     {
+      id: 6,
       title: 'Produit 6',
       description: 'Description du produit 6',
     },
@@ -57,13 +64,47 @@ function CommandeCreate() {
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State for popup visibility
   const [popupMessage, setPopupMessage] = useState(''); // State for popup message
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const message = 'Thank you for your order We will contact you for the details.';
-    setPopupMessage(message);
-    setIsPopupOpen(true); // Show the popup
-  };
 
+    // Construire un tableau d'objets contenant les informations de chaque produit
+    const productsData = produits.map((produit, index) => {
+      return {
+        productId: produit.id,
+        quantity: counts[index]
+      };
+    });
+
+    // Construire l'objet de données à envoyer au backend
+    const data = {
+      p_nom_client: p_nom_client,
+      p_prenom_client: p_prenom_client,
+      p_num_tel: p_num_tel,
+      p_numero_carte: p_numero_carte,
+      p_cvv:p_cvv,
+      p_adresse:p_adresse,
+      p_type_i:p_type_i,
+      p_code_postal:p_code_postal,
+      p_date_exp: p_date_exp,
+      products: productsData
+    };
+
+    // Envoyer les données au backend
+    axios.post('/api/commande', data)
+      .then(response => {
+        // Traiter la réponse du backend si nécessaire
+        console.log(response.data);
+        const message = 'Thank you for your order We will contact you for the details.';
+        setPopupMessage(message);
+        setIsPopupOpen(true);
+      })
+      .catch(error => {
+        // Gérer les erreurs
+        console.error('Error:', error);
+      });
+  };
+  
   const handlePopupClose = () => {
     setIsPopupOpen(false);
   };
@@ -122,8 +163,8 @@ function CommandeCreate() {
             <input type="text" id="p_type_i" name="p_type_i" value={p_type_i} onChange={(e) => setCardType(e.target.value)} />
           </div>
           <div className="input-group">
-            <label htmlFor="expDate">Date d'expiration</label>
-            <input type="text" id="expDate" name="expDate" value={expDate} onChange={(e) => setExpDate(e.target.value)} />
+            <label htmlFor="p_date_exp">Date d'expiration</label>
+            <input type="text" id="p_date_exp" name="p_date_exp" value={p_date_exp} onChange={(e) => setExpDate(e.target.value)} />
           </div>
         </div>
         <div className="input-group-container">
