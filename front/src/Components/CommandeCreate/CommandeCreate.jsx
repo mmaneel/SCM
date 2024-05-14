@@ -65,14 +65,22 @@ function CommandeCreate() {
     });
   };
 
-  // Fonction pour retirer un produit de la liste des produits sélectionnés
-  const removeFromSelected = (productId) => {
-    setSelectedProducts(prevSelectedProducts => {
-      const updatedSelected = { ...prevSelectedProducts };
-      delete updatedSelected[productId];
-      return updatedSelected;
-    });
-  };
+ // Fonction pour réinitialiser la quantité d'un produit à zéro
+const resetCount = (index) => {
+  const newCounts = [...counts];
+  newCounts[index] = 0;
+  setCounts(newCounts);
+};
+
+const removeFromSelected = (productId, index) => {
+  resetCount(index); // Réinitialiser la quantité du produit à zéro
+  setSelectedProducts(prevSelectedProducts => {
+    const updatedSelected = { ...prevSelectedProducts };
+    delete updatedSelected[productId];
+    return updatedSelected;
+  });
+};
+
 
   const [p_nom_client, setFirstName] = useState('');
   const [p_prenom_client, setLastName] = useState('');
@@ -122,12 +130,12 @@ function CommandeCreate() {
               <p>{produit.description}</p>
               <div className='ligne'></div>
               <div className='add_produit' >
-                <div style={{ display: "flex", backgroundColor: 'transparent' }}>
-                  <AddCircleOutlineIcon sx={{ backgroundColor: 'transparent', color: '#FFD335', cursor: 'pointer' }} onClick={() => incrementCount(index)} />
-                  <span>{counts[index]}</span>
-                </div>
-                <button className='add_btn' onClick={() => removeFromSelected(produit.id)}>Remove</button>
-              </div>
+  <div style={{ display: "flex", backgroundColor: 'transparent' }}>
+    <AddCircleOutlineIcon sx={{ backgroundColor: 'transparent', color: '#FFD335', cursor: 'pointer' }} onClick={() => incrementCount(index)} />
+    <span>{counts[index]}</span>
+  </div>
+  <button className='add_btn' onClick={() => removeFromSelected(produit.id, index)}>Remove</button>
+</div>
             </div>
           ))}
         </div>
