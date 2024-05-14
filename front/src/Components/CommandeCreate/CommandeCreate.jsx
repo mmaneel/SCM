@@ -38,18 +38,48 @@ function CommandeCreate() {
     },
   ];
 
-  // Tableau d'états pour suivre le nombre d'incréments pour chaque produit
   const [counts, setCounts] = useState(Array(produits.length).fill(0));
+  const [selectedProducts, setSelectedProducts] = useState({}); // Stocker les produits sélectionnés dans un objet
 
-  // Fonction pour incrémenter le nombre pour un produit spécifique
   const incrementCount = (index) => {
-    // Créer une copie du tableau des counts
     const newCounts = [...counts];
-    // Incrémenter le compteur pour le produit à l'index donné
     newCounts[index] += 1;
-    // Mettre à jour le tableau des counts
     setCounts(newCounts);
+
+    const productId = produits[index].id;
+    setSelectedProducts(prevSelectedProducts => {
+      // Vérifier si le produit est déjà sélectionné
+      if (prevSelectedProducts.hasOwnProperty(productId)) {
+        // S'il est déjà sélectionné, mettre à jour la quantité
+        return {
+          ...prevSelectedProducts,
+          [productId]: prevSelectedProducts[productId] + 1
+        };
+      } else {
+        // S'il n'est pas déjà sélectionné, l'ajouter avec une quantité de 1
+        return {
+          ...prevSelectedProducts,
+          [productId]: 1
+        };
+      }
+    });
   };
+
+ // Fonction pour réinitialiser la quantité d'un produit à zéro
+const resetCount = (index) => {
+  const newCounts = [...counts];
+  newCounts[index] = 0;
+  setCounts(newCounts);
+};
+
+const removeFromSelected = (productId, index) => {
+  resetCount(index); // Réinitialiser la quantité du produit à zéro
+  setSelectedProducts(prevSelectedProducts => {
+    const updatedSelected = { ...prevSelectedProducts };
+    delete updatedSelected[productId];
+    return updatedSelected;
+  });
+};
 
 
   const [p_nom_client, setFirstName] = useState('');
@@ -64,17 +94,8 @@ function CommandeCreate() {
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State for popup visibility
   const [popupMessage, setPopupMessage] = useState(''); // State for popup message
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Construire un tableau d'objets contenant les informations de chaque produit
-    const productsData = produits.map((produit, index) => {
-      return {
-        productId: produit.id,
-        quantity: counts[index]
-      };
-    });
 
     // Construire l'objet de données à envoyer au backend
     const data = {
@@ -87,7 +108,7 @@ function CommandeCreate() {
       p_type_i:p_type_i,
       p_code_postal:p_code_postal,
       p_date_exp: p_date_exp,
-      products: productsData
+      products: Object.entries(selectedProducts).map(([productId, quantity]) => ({ productId, quantity }))
     };
 
     // Envoyer les données au backend
@@ -109,10 +130,9 @@ function CommandeCreate() {
     setIsPopupOpen(false);
   };
 
-
   return (
     <>
-      <div className='create_commande'>
+     <div className='create_commande'>
         <h1 className='create_commande-titre'>  Add your  order :</h1>
         <div className='produit_content'>
           {produits.map((produit, index) => (
@@ -121,12 +141,12 @@ function CommandeCreate() {
               <p>{produit.description}</p>
               <div className='ligne'></div>
               <div className='add_produit' >
-                <div style={{ display: "flex", backgroundColor: 'transparent' }}>
-                  <AddCircleOutlineIcon sx={{ backgroundColor: 'transparent', color: '#FFD335', cursor: 'pointer' }} onClick={() => incrementCount(index)} />
-                  <span>{counts[index]}</span>
-                </div>
-                <button className='add_btn'>Add</button>
-              </div>
+  <div style={{ display: "flex", backgroundColor: 'transparent' }}>
+    <AddCircleOutlineIcon sx={{ backgroundColor: 'transparent', color: '#FFD335', cursor: 'pointer' }} onClick={() => incrementCount(index)} />
+    <span>{counts[index]}</span>
+  </div>
+  <button className='add_btn' onClick={() => removeFromSelected(produit.id, index)}>Remove</button>
+</div>
             </div>
           ))}
         </div>
