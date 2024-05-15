@@ -129,9 +129,9 @@
   input[type="tel"] {
     width: 80%; /* Set full width within each input group */
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #161515;
     border-radius: 5px;
-    color: white;
+    color: #161515;
   }
  
   

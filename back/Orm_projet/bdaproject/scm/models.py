@@ -18,16 +18,17 @@ class Client(models.Model):
     nom_client = models.CharField(max_length=255)
     prenom_client = models.CharField(max_length=255)
     num_tel = models.CharField(max_length=255)
-    email = models.EmailField()
 
 class Carte(models.Model):
     numero = models.CharField(max_length=16, primary_key=True)
-    cvv = models.IntegerField()
-    date_exp = models.DateField()
-    balance = models.DecimalField(max_digits=10, decimal_places=2)
+    cvv = models.IntegerField(null=False)
+    date_exp = models.IntegerField(null=False)
+    balance = models.DecimalField(max_digits=10, decimal_places=0)  # Adjusted precision
     type_carte = models.ForeignKey(TypeCarte, on_delete=models.CASCADE)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE,null=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True)
 
+    def __str__(self):
+        return self.numero
 
 class Commande(models.Model):
     commande_date = models.DateField()
