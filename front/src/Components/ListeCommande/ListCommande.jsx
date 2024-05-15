@@ -7,13 +7,14 @@ import PopupValidate from './PopupValidate';
 import axios from 'axios';
 import "./ListCommande.css";
 
+import TrackingControl from '../TrackingControl/TrackingControl';
+
 function ListCommande() {
   const [userAccount, setUserAccount] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const [notification, setNotification] = useState('');
-  const [notification1, setNotification1] = useState('');
-  const [notification2, setNotification2] = useState('');
+ 
 
   const handleOpenModal = (rowData) => {
     setSelectedRow(rowData);
@@ -112,9 +113,21 @@ console.log(result[0]['result'])
     }
   };
 
+  const renderNotification = (notification) => {
+    // Diviser la chaîne de notification en sujet et corps
+    const [subject, body] = notification.split('Body:');
+
+    return (
+      <div className="notification">
+        <pre style={{color:'white'}}>Subject: {subject.trim()}</pre>
+        <pre style={{color:'white'}}>Body: {body.trim()}</pre>
+      </div>
+    );
+  };
   return (
     <>
-      <div className='liste_commande'>
+    <TrackingControl/>
+      <div className='liste_commande2'>
         <h1 className='liste_commande-titre'>Liste de commandes :</h1>
         <DataTable value={userAccount} paginator rows={5} tableStyle={{ minWidth: '50rem' }}>
           <Column header="" body={renderIcon} style={{ width: '15%' }} />

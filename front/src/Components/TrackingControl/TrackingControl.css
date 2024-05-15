@@ -1,82 +1,15 @@
 
-
-.liste_commande{
-    margin: 4% auto;
-   padding: 20px;
-    width: 90%;
-    color: white;
-    background-color: #161515;
-   
-}
-.liste_commande .liste_commande-titre{
-    margin-right: 4%;
-    font-weight: 400;
-    text-align: left;
-    color: white;
+.navbar {
+  background-color: #333;
+  padding: 10px;
 }
 
-.liste_commande button{
-    color: white;
-    padding: 10px 20px;
-
-   
-
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
 }
 
-/* Style pour la DataTable elle-même */
-.p-datatable {
-   
-    border-radius: 5px;
-    margin: 1%;
-  }
-  .p-datatable .p-column-header-content {
-    display: block;
+nav a:hover {
+  background-color: #555;
 }
-  
-  .p-datatable thead th {
-    background-color: var(--primary-color);
-    font-weight: bold;
-    padding: 1.5% 0%;
-    color: white;
-  }
-  
-  /* Style pour les cellules de données */
-  .p-datatable tbody td {
-    padding: 10px;
-  vertical-align: middle; 
-  }
-  .p-datatable tbody tr:nth-child(odd) {
-    background-color: #04525327; /* Couleur de fond pour les lignes impaires */
-  }
-  
-  /* Style pour les boutons de pagination */
-  .p-paginator .p-paginator-current,
-  .p-paginator .p-paginator-pages {
-    margin: 2px;
-  
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  /* Style pour les boutons de pagination actifs */
-  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background-color: #FFD335;
-    color:white;
-   width: 16px;
-   height: 25px;
-   border-radius: 100%;
-  }
-
-  
-.status-button {
-    background-color: #ffc107 !important; /* Yellow background */
-    color: black;  /* Black text color */
-    padding: 5px 10px; /* Button padding */
-    border-radius: 5px; /* Border radius */
-    border: none; /* Remove default border */
-    cursor: pointer; /* Indicate clickable button */
-  }
-  .p-tag-value{
-    background-color: transparent;
-  }
-  
