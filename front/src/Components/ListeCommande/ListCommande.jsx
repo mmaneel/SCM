@@ -2,16 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { Tag } from 'primereact/tag';
+import { Select, MenuItem } from '@mui/material';
 import PopupValidate from './PopupValidate';
 import axios from 'axios';
-import { Select, MenuItem } from '@mui/material';
 import "./ListCommande.css";
+
+import TrackingControl from '../TrackingControl/TrackingControl';
 
 function ListCommande() {
   const [userAccount, setUserAccount] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedRow, setSelectedRow] = useState();
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [notification, setNotification] = useState('');
+ 
 
   const handleOpenModal = (rowData) => {
     setSelectedRow(rowData);
@@ -20,18 +23,19 @@ function ListCommande() {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setNotification('');
+  };
+
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:5000/api/orders');
+      setUserAccount(response.data);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
   };
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get('http://127.0.0.1:5000/api/orders');
-        setUserAccount(response.data);
-      } catch (error) {
-        console.error('Error fetching orders:', error);
-      }
-    };
-
     fetchOrders();
   }, []);
 
@@ -39,13 +43,38 @@ function ListCommande() {
     return <AccountCircleOutlinedIcon />;
   };
 
-  const handleChangeStatus = (event, rowData) => {
-    // Ici, vous pouvez effectuer une requête API pour mettre à jour l'état de la commande
-    console.log(`Nouvelle valeur d'état pour la commande ${rowData.id} : ${event.target.value}`);
+  const handleChangeStatus = async (event, rowData) => {
+    const newStatus = event.target.value;
+    const updateData = {
+      p_commande_id: rowData.id,
+      p_nouveau_statut: newStatus,
+    };
+
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/api/maj_status', updateData);
+      const result = response.data;
+
+      // Update the local state to reflect the status change
+      setUserAccount(prevState =>
+        prevState.map(order =>
+          order.id === rowData.id ? { ...order, status: newStatus } : order
+        )
+      );
+console.log(result[0]['result'])
+      // Display the notification from the backend response
+      setNotification(result[0]['result']);
+      console.log(notification)
+      handleOpenModal(rowData);
+      //console.log(`Statut de la commande ${rowData.id} mis à jour avec succès.`);
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour du statut:', error);
+    }
   };
 
   const getStatusColor = (status) => {
     switch (status) {
+      case 2:
+        return '#FFFF00';
       case 3:
         return '#FFA500';
       case 4:
@@ -65,6 +94,8 @@ function ListCommande() {
 
   const getStatusLabel = (status) => {
     switch (status) {
+      case 2:
+        return 'Validée';
       case 3:
         return 'En transit';
       case 4:
@@ -82,9 +113,21 @@ function ListCommande() {
     }
   };
 
+  const renderNotification = (notification) => {
+    // Diviser la chaîne de notification en sujet et corps
+    const [subject, body] = notification.split('Body:');
+
+    return (
+      <div className="notification">
+        <pre style={{color:'white'}}>Subject: {subject.trim()}</pre>
+        <pre style={{color:'white'}}>Body: {body.trim()}</pre>
+      </div>
+    );
+  };
   return (
     <>
-      <div className='liste_commande'>
+    <TrackingControl/>
+      <div className='liste_commande2'>
         <h1 className='liste_commande-titre'>Liste de commandes :</h1>
         <DataTable value={userAccount} paginator rows={5} tableStyle={{ minWidth: '50rem' }}>
           <Column header="" body={renderIcon} style={{ width: '15%' }} />
@@ -108,6 +151,9 @@ function ListCommande() {
                     color: getStatusColor(rowData.status),
                   }}
                 >
+                  <MenuItem value={2} style={{ color: '#FFFF00' }}>
+                  Validée
+                  </MenuItem>
                   <MenuItem value={3} style={{ color: '#FFA500' }}>
                     En transit
                   </MenuItem>
@@ -127,16 +173,19 @@ function ListCommande() {
                     Remboursée
                   </MenuItem>
                 </Select>
-                <span style={{ marginLeft: '10px', color: getStatusColor(rowData.status) }}>
-                  {getStatusLabel(rowData.status)}
-                </span>
+                
               </div>
             )}
             style={{ width: '15%' }}
           />
         </DataTable>
+        {notification && (
+          <div className="notification">
+            <pre style={{color:'white'}}>{notification}</pre>
+          </div>
+        )}
       </div>
-      <PopupValidate isOpen={showModal} onClose={handleCloseModal} selectedRow={selectedRow} />
+      <PopupValidate isOpen={showModal} onClose={handleCloseModal} selectedRow={selectedRow} notification={notification} />
     </>
   );
 }

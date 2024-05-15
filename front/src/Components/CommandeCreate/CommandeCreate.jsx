@@ -3,6 +3,8 @@ import "./Commande.css"
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Popup from './PopupCommand'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import TrackingControl from '../TrackingControl/TrackingControl';
 
 function CommandeCreate() {
   const produits = [
@@ -152,6 +154,8 @@ function CommandeCreate() {
 
   return (
     <>
+    <TrackingControl/>
+    <div className='command'>
       <div className='create_commande'>
         <h1 className='create_commande-titre'>  Add your  order :</h1>
         <div className='produit_content'>
@@ -220,6 +224,7 @@ function CommandeCreate() {
           <button type="submit">Confirm your Command</button>
         </form>
         <Popup isOpen={isPopupOpen} onClose={handlePopupClose} message={popupMessage} />
+      </div>
       </div>
     </>
   )

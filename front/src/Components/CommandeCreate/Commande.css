@@ -1,5 +1,10 @@
 
-
+.command{
+  background-color: #161515;
+  padding: 6%;
+ 
+ 
+}
 .create_commande{
     margin: 4% auto;
    padding: 20px;
@@ -14,7 +19,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3,30%);
-    grid-template-rows: repeat(2, 270px);
+    /*grid-template-rows: repeat(2, 270px);*/
     justify-content: center;
     align-items: center;
 
@@ -62,6 +67,7 @@
     margin-bottom: 4%;
     width: 100%;
     border-top: 1px solid rgb(220, 220, 220);
+    
 
  
  }
@@ -88,10 +94,11 @@
  }
 
  .signup-form {
-    margin: 4% auto;
+    margin: 0% auto;
     padding: 20px;
     width: 75%;
     border: 1px solid white;
+    
   }
   
   .signup-form h3 {

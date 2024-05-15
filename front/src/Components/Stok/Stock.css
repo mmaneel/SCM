@@ -1,56 +1,60 @@
 
 
-.liste_commande{
-    margin: 4% auto;
-   padding: 20px;
-    width: 90%;
+.liste_commande1{
+   padding: 10% 20px;
+    width: 100%;
     color: white;
     background-color: #161515;
+    margin: 0;
    
 }
-.liste_commande .liste_commande-titre{
+.liste_commande1 .liste_commande-titre{
     margin-right: 4%;
     font-weight: 400;
     text-align: left;
     color: white;
 }
 
-.liste_commande button{
+ button{
     color: white;
     padding: 10px 20px;
 
-   
-
+}
+.liste_commande1 .p-datatable .p-paginator-bottom {
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+  background-color: #161515;
 }
 
 /* Style pour la DataTable elle-même */
-.p-datatable {
+.liste_commande1 .p-datatable {
    
     border-radius: 5px;
     margin: 1%;
   }
-  .p-datatable .p-column-header-content {
+  .liste_commande1 .p-datatable .p-column-header-content {
     display: block;
 }
   
-  .p-datatable thead th {
+.liste_commande1 .p-datatable thead th {
     background-color: var(--primary-color);
     font-weight: bold;
     padding: 1.5% 0%;
     color: white;
+    background-color: #ffc107 !important;
   }
   
   /* Style pour les cellules de données */
-  .p-datatable tbody td {
+  .liste_commande1 .p-datatable tbody td {
     padding: 10px;
-  vertical-align: middle; 
-  }
-  .p-datatable tbody tr:nth-child(odd) {
-    background-color: #04525327; /* Couleur de fond pour les lignes impaires */
+  vertical-align: middle;
+color: white;
+background-color: #161515 !important;
   }
   
+  
   /* Style pour les boutons de pagination */
-  .p-paginator .p-paginator-current,
+  .liste_commande1  .p-paginator .p-paginator-current,
   .p-paginator .p-paginator-pages {
     margin: 2px;
   
@@ -59,7 +63,7 @@
   }
   
   /* Style pour les boutons de pagination actifs */
-  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  .liste_commande1  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background-color: #FFD335;
     color:white;
    width: 16px;
@@ -68,7 +72,7 @@
   }
 
   
-.status-button {
+  .liste_commande1 .status-button {
     background-color: #ffc107 !important; /* Yellow background */
     color: black;  /* Black text color */
     padding: 5px 10px; /* Button padding */
@@ -76,7 +80,7 @@
     border: none; /* Remove default border */
     cursor: pointer; /* Indicate clickable button */
   }
-  .p-tag-value{
+  .liste_commande1 .p-tag-value{
     background-color: transparent;
   }
   

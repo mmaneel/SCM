@@ -1,14 +1,14 @@
 
 
-.liste_commande{
-    margin: 4% auto;
+.liste_commande2{
+    margin: 0;
    padding: 20px;
-    width: 90%;
+    width: 100%;
     color: white;
     background-color: #161515;
    
 }
-.liste_commande .liste_commande-titre{
+.liste_commande2 .liste_commande-titre{
     margin-right: 4%;
     font-weight: 400;
     text-align: left;
@@ -16,7 +16,7 @@
   
 }
 
-.liste_commande button{
+.liste_commande2 button{
     color: white;
     padding: 10px 20px;
 
@@ -25,56 +25,57 @@
 }
 
 /* Style pour la DataTable elle-même */
-.p-datatable {
+.liste_commande2 .p-datatable {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin: 1%;
   }
-  .p-datatable .p-column-header-content {
+  .liste_commande2  .p-datatable .p-column-header-content {
     display: block;
 }
   
-  .liste_commande .p-datatable thead th {
-    background-color: var(--primary-color);
+.liste_commande2   .p-datatable thead th {
+  background-color: #FFD234 !important;
     font-weight: bold;
     padding: 1.5% 0%;
-    color:#FFD234;
+    color:white;
   }
   
   /* Style pour les cellules de données */
-  .p-datatable tbody td {
+  .liste_commande2 .p-datatable tbody td {
     padding: 10px;
   vertical-align: middle; 
   }
-  .p-datatable tbody tr:nth-child(odd) {
+  .liste_commande2  .p-datatable tbody tr:nth-child(odd) {
     background-color: #04525327; /* Couleur de fond pour les lignes impaires */
+    color: white;
   }
   
   /* Style pour les boutons de pagination */
-  .p-paginator .p-paginator-current,
+  .liste_commande2  .p-paginator .p-paginator-current,
   .p-paginator .p-paginator-pages {
     margin: 2px;
   
     display: flex;
     justify-content: space-between;
   }
-  .p-paginator-page{
+  .liste_commande2  .p-paginator-page{
     color: #045253;
     width: 30px;
   }
   /* Style pour les boutons de pagination actifs */
-  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  .liste_commande2  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background-color: #FFD335;
     color:white;
    width: 16px;
    height: 25px;
    border-radius: 100%;
   }
-  .datatable-bordered {
+ .datatable-bordered {
     border: 1px solid #ccc; /* Adjust border style and color */
   }
   /* In your ListCommande.css file */
-.status-button {
+  .status-button {
     background-color: #ffc107 !important; /* Yellow background */
     color: black;  /* Black text color */
     padding: 5px 10px; /* Button padding */
@@ -82,7 +83,7 @@
     border: none; /* Remove default border */
     cursor: pointer; /* Indicate clickable button */
   }
-  .p-tag-value{
+ .p-tag-value{
     background-color: transparent;
   }
   
@@ -93,24 +94,26 @@
     padding: 30px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 100%;
+    width: 1000px;
     margin: auto;
+    height: 400px;
   }
   
-  .popup-content1 h2 {
+    .popup-content1 h2 {
     margin-bottom: 15px;
     background-color: transparent;
     color: white;
 
   }
-  
   .popup-content1 p {
     margin-bottom: 15px;
     background-color: transparent;
     color: white;
+    width: 500px;
+    padding: 2%;
   }
   
-  .popup-content1 button {
+ .popup-content1 button {
     background-color: #FFD234;
     color: white;
     padding: 10px 20px;
@@ -122,15 +125,14 @@
 
 
 
-
-  .popup-container {
+ .popup-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
   }
   
-  .popup-title {
+   .popup-title {
     font-size: 20px;
     margin-bottom: 10px;
   }
@@ -138,7 +140,6 @@
   .popup-message {
     margin-bottom: 20px;
   }
-  
   .modal-buttons {
     display: flex;
     justify-content: space-between;
@@ -165,27 +166,29 @@
     ;
     color: #fff;
   }
-  .select-bg-white {
+   .select-bg-white {
     background-color: white;
   }
-  .modal-buttons button:last-child:hover {
+   .modal-buttons button:last-child:hover {
     background-color: #FFD335
     ;
   }
-  .btn_validate{
+   .btn_validate{
     border: none;
     width: 300px;
   }
-  .status-button{
+    .status-button{
     width: 150px;
     height: 30px;
   }
   
-  .ReactModal__Content {
+ .ReactModal__Content {
     border: none !important;
     background: transparent !important;
     overflow: hidden !important;
     padding: 40px !important;
+    width: 600px !important;
+    height: 300px;
   }
   .ReactModal__Content--after-open{
     border: none !important;
